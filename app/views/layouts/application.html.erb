@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= full_title(yield(:title)) %></title>
+        <%= render 'layouts/rails_default'%>
+    </head>
+    <body>
+        <%= render 'layouts/header' %>
+            <div class = "container">
+                <% flash.each do |message_type, message| %>
+                    <% if message_type ==  "danger"%>
+                        <%= content_tag(:div, message, class: "card-panel red darken-4 #{message_type}") %>
+                    <% else %>
+                        <%= content_tag(:div, message, class: "card-panel blue lighten-2 #{message_type}") %>
+                    <% end %>
+                <% end %>
+            </div>
+
+            <main>
+            <%= yield %>
+            </main>
+        </div>
+        <%= render 'layouts/footer' %>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+</html>

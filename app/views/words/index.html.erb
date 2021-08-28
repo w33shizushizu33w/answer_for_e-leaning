@@ -1,0 +1,54 @@
+<% provide(:title, "Words learned") %>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col s4">
+            <div class="card">
+                <div class="card-action light-blue darken-2 white-text">
+                    <h6>User Information</h6>
+                </div>
+                <center>
+                    <div class="card-image">
+                        <%= render 'shared/user_info' %>
+                    </div>
+                    <div class="card-content">
+                        <h3><%= current_user.name %></h3>
+                        <h4><%= current_user.email %></h4>
+                    </div>
+                </center>
+            </div>
+        </div>
+        <div class="col s8">
+            <div class="card-panel light-blue darken-2 white-text">
+                Words Learned
+            </div>
+            <table>
+                <% unless @answers.blank? %>
+                <thead>
+                    <tr>
+                        <th>Word</th>
+                        <th>Your answer</th>
+                        <th>Correct answer</th>
+                    </tr>
+                </thead>
+                <tbody>            
+                    <% @answers.each do |answer| %> 
+                    <tr>
+                        <td><%= answer.word.content %></td>
+                        <td><%= answer.choice.content %></td>
+                        <td><%= answer.word.correct_ans %></td>
+                        <% if answer.choice.content == answer.word.correct_ans %>
+                            <td> <i class="small material-icons">check</i> </td> 
+                        <% else %>
+                            <td> <i class="small material-icons">close</i> </td>
+                        <% end %>
+                    </tr>
+                    <% end %>
+                <% else %>
+                    You have no words.
+                </tbody>
+                <% end %>
+            </table>
+        </div>
+    </div>
+</div>
